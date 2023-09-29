@@ -1,0 +1,78 @@
+<?php
+
+/*
+
+ */
+include './Mars_rover.php';
+
+class Map {
+	private $map_size = array();
+	private $map = array();
+	private $user_input = array();
+	private $nb_of_rovers;
+	private $rover_array;
+
+
+	function __construct($argv, $argc){
+		//parse the map and get the data
+		try{
+			$this->parse_and_initiate($argv, $argc);
+		}
+		catch(Exception $e){
+			throw $e;
+		}
+		//actually create the map and spawn the rovers
+		echo "Map Size :" ;
+		foreach ($this->map_size as $value){
+			echo "[$value]";
+		}
+		echo "\n";
+		echo "Nb of rovers [$this->nb_of_rovers]\n";
+		$this->instantiate_rovers();
+	}
+
+	function parse_and_initiate($argv, $argc){
+		//check that the user provided at least an argument to the function
+		if ($argc < 2 ){
+			echo ("Within parse_map"). "this is argv : \n";
+			throw new Exception ("Please provide the map");
+		}
+		//gather the map and put it into an array
+		$map = fopen($argv[1], "r") or die ("Please provide a file to open\n");
+		$this->user_input = explode("\n", fread($map, filesize($argv[1])));
+		fclose($map);
+		//validate the nb of rover
+		$line_count = count($this->user_input);
+		if ($line_count  % 2 == 0 ){
+			throw new Exception("You did not provided a map with the right format\n");
+		}
+		//get the nb of rovers and create the variables;
+		$this->nb_of_rovers = ($line_count - 1) / 2;
+		/*
+			Map checking: the map is at $file_array[0]
+			we use the function array_map to force explode to return so ints
+			This means that we have our map size in our structure data
+			Then we just check that we not have a map size of 0 
+			This could be a seperated method to make everything more clean
+		*/
+		$this->map_size = array_map('intval', explode(' ', $this->user_input[0]));
+		if ($this->map_size[0] == 0){
+			throw new Exception ("Was not able to get the map size");
+		}
+	}
+
+	function instantiate_rovers(){
+		//then instantiate the rovers and move them one by one (instantiate move, instantiate move)
+		for($i = $this->nb_of_rovers, $y = 1, $n = 1; $i > 0; $i--){
+			$this->rover_array[$y - 1] = new mars_rover($n,$this->user_input[$y], $this->user_input[$y+1]);
+			$y = $y+2;
+			$n++;
+		}
+	}
+
+
+
+}
+
+
+?>
