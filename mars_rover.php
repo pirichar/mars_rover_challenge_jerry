@@ -86,16 +86,16 @@ class mars_rover{
 	*/
 
 	private function move_rover(){
-		if ($this->direction[0] == "N" && $this->coordinate[0] < $this->map_size[0]){
+		if ($this->direction[0] == "W" && $this->coordinate[0] < $this->map_size[0]){
 			$this->coordinate[0]++;
 		}
-		if ($this->direction[0] == "S" && $this->coordinate[0] < $this->map_size[0]){
+		else if ($this->direction[0] == "E" && $this->coordinate[0] < $this->map_size[0]){
 			$this->coordinate[0]--;
 		}
-		if ($this->direction[0] == "W" && $this->coordinate[1] < $this->map_size[1]){
+		else if ($this->direction[0] == "N" && $this->coordinate[1] < $this->map_size[1]){
 			$this->coordinate[1]++;
 		}
-		if ($this->direction[0] == "E" && $this->coordinate[1] < $this->map_size[1]){
+		else if ($this->direction[0] == "S" && $this->coordinate[1] < $this->map_size[1]){
 			$this->coordinate[1]--;
 		}
 	}
