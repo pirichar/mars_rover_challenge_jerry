@@ -26,7 +26,6 @@ class map {
 
 
 	function __construct($argv, $argc){
-		echo "\nWithin the MAP constructor\n";
 		//parse the map and get the data
 		try{
 			$this->parse_map($argv, $argc);
@@ -75,9 +74,10 @@ class map {
 
 	function instantiate_rovers(){
 		//then instantiate the rovers and move them one by one (instantiate move, instantiate move)
-		for($i = $this->nb_of_rovers, $y = 1; $i > 0; $i--){
-			$this->rover_array[$y - 1] = new mars_rover($y,$this->user_input[$y], $this->user_input[$y+1]);
+		for($i = $this->nb_of_rovers, $y = 1, $n = 1; $i > 0; $i--){
+			$this->rover_array[$y - 1] = new mars_rover($n,$this->user_input[$y], $this->user_input[$y+1]);
 			$y = $y+2;
+			$n++;
 		}
 	}
 
@@ -90,21 +90,30 @@ class mars_rover{
 	private $direction = ["N", "W", "S", "E"];
 	private $coordinate = array(0 ,0);
 	private $rover_name;
+	private $move_set;
 
 	function __construct($name, $position, $direction){
-		echo "\nWithin the mars rover constructor\n";
 		$this->rover_name = $name;
+		$this->move_set = $direction;
+		$this->announce_yourself_start();
 		$this->set_position($position);
-		$this->move_rover($direction);
-
-		echo "Hello from Rover " . $this->rover_name . "\n" ;
-		echo "Rover coordinates = ". $this->coordinate[0] . " " .  $this->coordinate[1]. "\n";
-		echo "Rover is facing = ". $this->direction[0] . " " . "\n";
-		echo "I will have to move = ". $direction. "\n";
-
-
+		$this->parse_movement();
+		$this->announce_yourself_end();
 	}
 
+	private function announce_yourself_start(){
+		echo "\nHello from Rover " . $this->rover_name .", i just arrived here " ."\n" ;
+		echo "Rover coordinates = ". $this->coordinate[0] . " " .  $this->coordinate[1]. "\n";
+		echo "Rover is facing = ". $this->direction[0] . " " . "\n";
+		echo "I will have to move = ". $this->move_set. "\n";
+	}
+
+	private function announce_yourself_end(){
+		echo "\nHello from Rover " . $this->rover_name . " I am now done with my mission ". "\n" ;
+		echo "Rover coordinates = ". $this->coordinate[0] . " " .  $this->coordinate[1]. "\n";
+		echo "Rover is facing = ". $this->direction[0] . " " . "\n";
+	}
+	
 	private function set_position($position){
 		//first split the position into an array of 3 characters
 		$splitted_position = explode(' ',$position);
@@ -128,32 +137,58 @@ class mars_rover{
 	}
 
 
+	
+	/*
+	Logic to turn: L and R make the rover spin 90 degress left or right respectively
+	you start on the 0 position of the array which is north 
+	when the user provides you an L you go downward into the array
+	when the user provides you an R you go upward into the array
+	The position should wrap around the array meaning that if 
+	you are at index 0 and you recieve an L you should get to the position 3
+	*/
+	private function parse_movement(){
+		//go through the moveset string and apply the right movement
+		foreach (str_split($this->move_set) as $char){
+			if ($char == 'L'){
+				$this->rotate_left();
+			}
+			if ($char == 'R'){
+				$this->rotate_right();
+			}
+			if ($char == 'M'){
+				$this->move_rover();
+			}
+		}
+		
+	}
 	/*
 		Logic to move around : M najes the rove move forware by 1 grid point 
 		If you are N or S ; you affect the [0,Y] coordinate (y)
 		If you are W or E; you affect the [X,0] coordinate (x)
 	*/
 
-	/*
-		Logic to turn: L and R make the rover spin 90 degress left or right respectively
-		you start on the 0 position of the array which is north 
-		when the user provides you an L you go downward into the array
-		when the user provides you an R you go upward into the array
-		The position should wrap around the array meaning that if 
-		you are at index 0 and you recieve an L you should get to the position 3
-	*/
-	private function move_rover($direction){
-		// echo "Move rover recieved = \n";
-		// var_dump($direction);
-
+	private function move_rover(){
+		if ($this->direction[0] == "N"){
+			$this->coordinate[0]++;
+		}
+		if ($this->direction[0] == "S"){
+			$this->coordinate[0]--;
+		}
+		if ($this->direction[0] == "W"){
+			$this->coordinate[0]++;
+		}
+		if ($this->direction[0] == "E"){
+			$this->coordinate[0]--;
+		}
 	}
-    public function rotateRight() {
+
+   	private function rotate_right() {
         // Rotate right by shifting the array to the left
         $firstDirection = array_shift($this->direction);
         array_push($this->direction, $firstDirection);
     }
 
-    public function rotateLeft() {
+    private function rotate_left() {
         // Rotate left by shifting the array to the right
         $lastDirection = array_pop($this->direction);
         array_unshift($this->direction, $lastDirection);
