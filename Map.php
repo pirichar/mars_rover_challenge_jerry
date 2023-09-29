@@ -22,13 +22,20 @@ class Map {
 			throw $e;
 		}
 		//actually create the map and spawn the rovers
-		echo "Map Size :" ;
+
+		$this->announce_map();
+		$this->instantiate_rovers();
+	}
+	
+	function announce_map(){
+		
+		echo "Hello, welcome user, please change the map file to test what ever you want \n",
+		"Current Map Size :" ;
 		foreach ($this->map_size as $value){
 			echo "[$value]";
 		}
 		echo "\n";
 		echo "Nb of rovers [$this->nb_of_rovers]\n";
-		$this->instantiate_rovers();
 	}
 
 	function parse_and_initiate($argv, $argc){
