@@ -13,7 +13,6 @@
 
 	**ROVER PART**
 	Second and third line represent the first rover
-
 */
 
 class map {
@@ -95,8 +94,8 @@ class mars_rover{
 	function __construct($name, $position, $direction){
 		$this->rover_name = $name;
 		$this->move_set = $direction;
-		$this->announce_yourself_start();
 		$this->set_position($position);
+		$this->announce_yourself_start();
 		$this->parse_movement();
 		$this->announce_yourself_end();
 	}
@@ -175,10 +174,10 @@ class mars_rover{
 			$this->coordinate[0]--;
 		}
 		if ($this->direction[0] == "W"){
-			$this->coordinate[0]++;
+			$this->coordinate[1]++;
 		}
 		if ($this->direction[0] == "E"){
-			$this->coordinate[0]--;
+			$this->coordinate[1]--;
 		}
 	}
 
