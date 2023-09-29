@@ -33,7 +33,7 @@ class mars_rover{
 		echo "Rover coordinates = ". $this->coordinate[0] . " " .  $this->coordinate[1]. "\n";
 		echo "Rover is facing = ". $this->direction[0] . " " . "\n";
 	}
-	
+
 	private function set_position($position){
 		//first split the position into an array of 3 characters
 		$splitted_position = explode(' ',$position);
@@ -55,7 +55,7 @@ class mars_rover{
 			throw new Exception("Invalid initial direction");
 		}
 	}
-	
+
 	/*
 	Logic to turn: L and R make the rover spin 90 degress left or right respectively
 	you start on the 0 position of the array which is north 
@@ -77,12 +77,12 @@ class mars_rover{
 				$this->move_rover();
 			}
 		}
-		
 	}
+
 	/*
 		Logic to move around : M najes the rove move forware by 1 grid point 
-		If you are N or S ; you affect the [0,Y] coordinate (y)
-		If you are W or E; you affect the [X,0] coordinate (x)
+		If you are N or S ; you affect the [0,Y] coordinate (y) (index 1)
+		If you are W or E; you affect the [X,0] coordinate (x)(index 0)
 	*/
 
 	private function move_rover(){
