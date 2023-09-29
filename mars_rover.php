@@ -89,7 +89,6 @@ class mars_rover{
 
 	private $direction = ["N", "W", "S", "E"];
 	private $coordinate = array(0 ,0);
-	private $actual_direction;
 	private $rover_name;
 
 	function __construct($name, $position, $direction){
@@ -98,6 +97,7 @@ class mars_rover{
 		$this->set_position($position);
 		$this->move_rover($direction);
 
+		echo "Hello from Rover " . $this->rover_name . "\n" ;
 		echo "Rover coordinates = ". $this->coordinate[0] . " " .  $this->coordinate[1]. "\n";
 		echo "Rover is facing = ". $this->direction[0] . " " . "\n";
 		echo "I will have to move = ". $direction. "\n";
