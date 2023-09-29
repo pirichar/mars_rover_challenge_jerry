@@ -76,7 +76,7 @@ class map {
 	function instantiate_rovers(){
 		//then instantiate the rovers and move them one by one (instantiate move, instantiate move)
 		for($i = $this->nb_of_rovers, $y = 1; $i > 0; $i--){
-			$this->rover_array[$y - 1] = new mars_rover($this->user_input[$y], $this->user_input[$y+1]);
+			$this->rover_array[$y - 1] = new mars_rover($y,$this->user_input[$y], $this->user_input[$y+1]);
 			$y = $y+2;
 		}
 	}
@@ -87,34 +87,44 @@ class map {
 
 class mars_rover{
 
-	private $direction = ['N', 'W', 'S', 'E'];
+	private $direction = ["N", "W", "S", "E"];
 	private $coordinate = array(0 ,0);
 	private $actual_direction;
+	private $rover_name;
 
-	function __construct($position, $direction){
+	function __construct($name, $position, $direction){
 		echo "\nWithin the mars rover constructor\n";
+		$this->rover_name = $name;
 		$this->set_position($position);
 		$this->move_rover($direction);
 
-		// echo "This is my direction as a rover $this->actual_direction\n";
+		echo "Rover coordinates = ". $this->coordinate[0] . " " .  $this->coordinate[1]. "\n";
+		echo "Rover is facing = ". $this->direction[0] . " " . "\n";
+		echo "I will have to move = ". $direction. "\n";
+
 
 	}
 
 	private function set_position($position){
-		echo "Set position recived = \n";
-		var_dump($position);
 		//first split the position into an array of 3 characters
 		$splitted_position = explode(' ',$position);
 		if(count($splitted_position ) > 3){
 			throw new Exception ("Please provide the position of the rover this way 1 2 N \n");
 		}
-		$this->coordinate = array_slice($splitted_position, 0,2);
-		echo ("this is my rover coordinate\n");
-		var_dump ($this->coordinate);
-		echo ("this what I am facing\n");
-		$actual_coordinate = array_slice($splitted_position, 2 );
-		var_dump ($actual_coordinate);
-		// $this->actual_direction = $this->direction[$actual_coordinate];
+		//get the X and Y coordinates
+		$this->coordinate = array_map('intval',array_slice($splitted_position, 0,2));
+		//Get the facing direction
+		$actual_coordinate = array_slice($splitted_position, 2);
+		if (in_array($actual_coordinate[0], $this->direction )){
+			$current_index = array_search($actual_coordinate[0], $this->direction);
+			$this->direction = array_merge(
+				array_slice($this->direction, $current_index),
+				array_slice($this->direction, 0, $current_index)
+			);
+		}
+		else{
+			throw new Exception("Invalid initial direction");
+		}
 	}
 
 
@@ -133,17 +143,28 @@ class mars_rover{
 		you are at index 0 and you recieve an L you should get to the position 3
 	*/
 	private function move_rover($direction){
-		echo "Move rover recieved = \n";
-		var_dump($direction);
+		// echo "Move rover recieved = \n";
+		// var_dump($direction);
 
 	}
+    public function rotateRight() {
+        // Rotate right by shifting the array to the left
+        $firstDirection = array_shift($this->direction);
+        array_push($this->direction, $firstDirection);
+    }
+
+    public function rotateLeft() {
+        // Rotate left by shifting the array to the right
+        $lastDirection = array_pop($this->direction);
+        array_unshift($this->direction, $lastDirection);
+    }
 
 
 
 }
 
 try{
-	$rover = new map($argv, $argc);
+	$project = new map($argv, $argc);
 }
 catch (Exception $e){
 	echo $e;
