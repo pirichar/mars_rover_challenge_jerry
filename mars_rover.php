@@ -9,10 +9,12 @@ class mars_rover{
 	private $coordinate = array(0 ,0);
 	private $rover_name;
 	private $move_set;
+	private $map_size;
 
-	function __construct($name, $position, $direction){
+	function __construct($name, $position, $direction, $map_size){
 		$this->rover_name = $name;
 		$this->move_set = $direction;
+		$this->map_size = $map_size;
 		$this->set_position($position);
 		$this->announce_yourself_start();
 		$this->parse_movement();
@@ -84,16 +86,16 @@ class mars_rover{
 	*/
 
 	private function move_rover(){
-		if ($this->direction[0] == "N"){
+		if ($this->direction[0] == "N" && $this->coordinate[0] < $this->map_size[0]){
 			$this->coordinate[0]++;
 		}
-		if ($this->direction[0] == "S"){
+		if ($this->direction[0] == "S" && $this->coordinate[0] < $this->map_size[0]){
 			$this->coordinate[0]--;
 		}
-		if ($this->direction[0] == "W"){
+		if ($this->direction[0] == "W" && $this->coordinate[1] < $this->map_size[1]){
 			$this->coordinate[1]++;
 		}
-		if ($this->direction[0] == "E"){
+		if ($this->direction[0] == "E" && $this->coordinate[1] < $this->map_size[1]){
 			$this->coordinate[1]--;
 		}
 	}

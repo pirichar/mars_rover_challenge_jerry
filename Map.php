@@ -7,7 +7,6 @@ include './Mars_rover.php';
 
 class Map {
 	private $map_size = array();
-	private $map = array();
 	private $user_input = array();
 	private $nb_of_rovers;
 	private $rover_array;
@@ -28,7 +27,7 @@ class Map {
 	}
 	
 	function announce_map(){
-		
+
 		echo "Hello, welcome user, please change the map file to test what ever you want \n",
 		"Current Map Size :" ;
 		foreach ($this->map_size as $value){
@@ -71,7 +70,7 @@ class Map {
 	function instantiate_rovers(){
 		//then instantiate the rovers and move them one by one (instantiate move, instantiate move)
 		for($i = $this->nb_of_rovers, $y = 1, $n = 1; $i > 0; $i--){
-			$this->rover_array[$y - 1] = new mars_rover($n,$this->user_input[$y], $this->user_input[$y+1]);
+			$this->rover_array[$y - 1] = new mars_rover($n,$this->user_input[$y], $this->user_input[$y+1], $this->map_size);
 			$y = $y+2;
 			$n++;
 		}
