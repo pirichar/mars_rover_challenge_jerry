@@ -1,0 +1,1 @@
+## Usage : php index.php test.map
