@@ -44,9 +44,9 @@ php index.php test.map
 ```
 
 ## example
-Here is the input provided in the test.map
-You can add rovers by adding new lines in the map file
-Don't forger to add 2 lines per rover
+Here is the input provided in the test.map  
+You can add rovers by adding new lines in the map file  
+Don't forget to add 2 lines per rover  
 ```
 5 5
 1 2 N
