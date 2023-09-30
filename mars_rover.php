@@ -24,7 +24,7 @@ class mars_rover{
 	}
 
 	private function print_map(){
-		echo "Here is the map of my planet\n";
+		echo "\033[01;32mHere is the map of my planet = \n\033[0m";
 		for($i = $this->map_size[1]; $i >= 0; $i--){
 			for($j = 0; $j <= $this->map_size[0]; $j++){
 				if ($j == $this->coordinate[0] && $i == $this->coordinate[1]){
@@ -50,10 +50,10 @@ class mars_rover{
 	
 
 	private function announce_yourself_start(){
-		echo "\nHello from Rover " . $this->rover_name .", i just arrived here " ."\n" ;
-		echo "Rover coordinates = ". $this->coordinate[0] . " " .  $this->coordinate[1]. "\n";
-		echo "Rover is facing = ". $this->direction[0] . " " . "\n";
-		echo "I will have to move = ". $this->move_set. "\n";
+		echo "\n\033[01;31mHello from Rover " . $this->rover_name .", I just arrived here" ."\n\033[0m" ;
+		echo "\033[01;32mRover coordinates  \033[0m". $this->coordinate[0] . " " .  $this->coordinate[1]. "\n";
+		echo "\033[01;32mRover is facing = \033[0m". $this->direction[0] . " " . "\n";
+		echo "\033[01;32mI will have to move = \033[0m". $this->move_set. "\n";
 	}
 
 	private function announce_yourself_end(){

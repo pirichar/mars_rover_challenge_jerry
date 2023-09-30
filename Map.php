@@ -28,13 +28,13 @@ class Map {
 	
 	private function announce_map(){
 
-		echo "Hello, welcome user, please change the map file to test what ever you want \n",
-		"Current Map Size :" ;
+		echo "\033[01;31mHello user, welcome to the mars rover program\n\033[0m",
+		"\033[01;32mCurrent Map Size :\033[0m" ;
 		foreach ($this->map_size as $value){
 			echo "[$value]";
 		}
 		echo "\n";
-		echo "Nb of rovers [$this->nb_of_rovers]\n";
+		echo "\033[01;32mNb of rovers :\033[0m[$this->nb_of_rovers]\n";
 	}
 
 	private function parse_and_initiate($argv, $argc){
