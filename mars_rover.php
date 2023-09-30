@@ -17,9 +17,26 @@ class mars_rover{
 		$this->map_size = $map_size;
 		$this->set_position($position);
 		$this->announce_yourself_start();
+		$this->print_map();
 		$this->parse_movement();
 		$this->announce_yourself_end();
+		$this->print_map();
 	}
+
+	private function print_map(){
+		echo "\n";
+		for($i = $this->map_size[1]; $i >= 0; $i--){
+			for($j = 0; $j <= $this->map_size[0]; $j++){
+				if ($j == $this->coordinate[0] && $i == $this->coordinate[1]){
+					echo "x";
+				}
+				else
+					echo "0";
+			}
+			echo "\n";
+		}
+	}
+	
 
 	private function announce_yourself_start(){
 		echo "\nHello from Rover " . $this->rover_name .", i just arrived here " ."\n" ;
