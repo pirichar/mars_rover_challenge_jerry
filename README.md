@@ -37,4 +37,68 @@ won't start moving until the first one has finished.
 
 
 
-## Usage : php index.php test.map
+## Usage
+
+git clone repo
+php index.php test.map
+
+## example
+Here is the input provided in the test.map
+You can add rovers by adding new lines in the map file
+Don't forger to add 2 lines per rover
+5 5
+1 2 N
+LMLMLMLMM
+3 3 E
+MMRMMRMRRM
+
+## Output
+Hello user, welcome to the mars rover program
+Current Map Size :[5][5]
+Nb of rovers :[2]
+
+Hello from Rover 1, I just arrived here
+Rover coordinates  1 2
+Rover is facing = N 
+I will have to move = LMLMLMLMM
+Here is the map of my planet = 
+000000
+000000
+000000
+0N0000
+000000
+000000
+
+Hello from Rover 1, I am now done with my mission 
+Rover coordinates = 1 3
+Rover is facing = N 
+Here is the map of my planet = 
+000000
+000000
+0N0000
+000000
+000000
+000000
+
+Hello from Rover 2, I just arrived here
+Rover coordinates  3 3
+Rover is facing = E 
+I will have to move = MMRMMRMRRM
+Here is the map of my planet = 
+000000
+000000
+000E00
+000000
+000000
+000000
+
+Hello from Rover 2, I am now done with my mission 
+Rover coordinates = 1 5
+Rover is facing = E 
+Here is the map of my planet = 
+0E0000
+000000
+000000
+000000
+000000
+000000
