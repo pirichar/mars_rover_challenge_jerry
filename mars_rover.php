@@ -24,11 +24,11 @@ class mars_rover{
 	}
 
 	private function print_map(){
-		echo "\n";
+		echo "Here is the map of my planet\ncan you see me I'm the X \n";
 		for($i = $this->map_size[1]; $i >= 0; $i--){
 			for($j = 0; $j <= $this->map_size[0]; $j++){
 				if ($j == $this->coordinate[0] && $i == $this->coordinate[1]){
-					echo "x";
+					echo "X";
 				}
 				else
 					echo "0";
