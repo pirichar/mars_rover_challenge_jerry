@@ -56,6 +56,7 @@ MMRMMRMRRM
 ```
 
 ## Output
+![output](./output.png)  
 ```
 Hello user, welcome to the mars rover program
 Current Map Size :[5][5]
