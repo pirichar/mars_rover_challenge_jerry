@@ -26,7 +26,7 @@ class Map {
 		$this->instantiate_rovers();
 	}
 	
-	function announce_map(){
+	private function announce_map(){
 
 		echo "Hello, welcome user, please change the map file to test what ever you want \n",
 		"Current Map Size :" ;
@@ -37,10 +37,9 @@ class Map {
 		echo "Nb of rovers [$this->nb_of_rovers]\n";
 	}
 
-	function parse_and_initiate($argv, $argc){
+	private function parse_and_initiate($argv, $argc){
 		//check that the user provided at least an argument to the function
 		if ($argc < 2 ){
-			echo ("Within parse_map"). "this is argv : \n";
 			throw new Exception ("Please provide the map");
 		}
 		//gather the map and put it into an array
@@ -54,20 +53,25 @@ class Map {
 		}
 		//get the nb of rovers and create the variables;
 		$this->nb_of_rovers = ($line_count - 1) / 2;
-		/*
+		$this->map_checking();
+	}
+
+	private function map_checking(){
+			/*
 			Map checking: the map is at $file_array[0]
 			we use the function array_map to force explode to return so ints
 			This means that we have our map size in our structure data
 			Then we just check that we not have a map size of 0 
 			This could be a seperated method to make everything more clean
+			I also check that the array is 2 , if not I don't have a proper set of coordinates
 		*/
 		$this->map_size = array_map('intval', explode(' ', $this->user_input[0]));
-		if ($this->map_size[0] == 0){
+		if ($this->map_size[0] == 0 ||  sizeof($this->map_size) != 2){
 			throw new Exception ("Was not able to get the map size");
 		}
 	}
 
-	function instantiate_rovers(){
+	private function instantiate_rovers(){
 		//then instantiate the rovers and move them one by one (instantiate move, instantiate move)
 		for($i = $this->nb_of_rovers, $y = 1, $n = 1; $i > 0; $i--){
 			$this->rover_array[$y - 1] = new mars_rover($n,$this->user_input[$y], $this->user_input[$y+1], $this->map_size);

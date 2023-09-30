@@ -29,7 +29,7 @@ class mars_rover{
 	}
 
 	private function announce_yourself_end(){
-		echo "\nHello from Rover " . $this->rover_name . " I am now done with my mission ". "\n" ;
+		echo "\nHello from Rover " . $this->rover_name . ", I am now done with my mission ". "\n" ;
 		echo "Rover coordinates = ". $this->coordinate[0] . " " .  $this->coordinate[1]. "\n";
 		echo "Rover is facing = ". $this->direction[0] . " " . "\n";
 	}
