@@ -65,7 +65,7 @@ class mars_rover{
 	private function set_position($position){
 		//first split the position into an array of 3 characters
 		$splitted_position = explode(' ',$position);
-		if(count($splitted_position ) > 3){
+		if(count($splitted_position ) != 3){
 			throw new Exception ("Please provide the position of the rover this way 1 2 N \n");
 		}
 		//get the X and Y coordinates
