@@ -46,13 +46,16 @@ php index.php test.map
 Here is the input provided in the test.map
 You can add rovers by adding new lines in the map file
 Don't forger to add 2 lines per rover
+```
 5 5
 1 2 N
 LMLMLMLMM
 3 3 E
 MMRMMRMRRM
+```
 
 ## Output
+```
 Hello user, welcome to the mars rover program
 Current Map Size :[5][5]
 Nb of rovers :[2]
@@ -102,3 +105,4 @@ Here is the map of my planet =
 000000
 000000
 000000
+```
