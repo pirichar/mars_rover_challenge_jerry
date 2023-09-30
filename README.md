@@ -38,9 +38,10 @@ won't start moving until the first one has finished.
 
 
 ## Usage
-
+```
 git clone repo
 php index.php test.map
+```
 
 ## example
 Here is the input provided in the test.map
