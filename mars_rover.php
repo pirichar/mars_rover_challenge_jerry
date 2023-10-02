@@ -95,11 +95,11 @@ class mars_rover{
 	private function parse_movement(){
 		//go through the moveset string and apply the right movement
 		foreach (str_split($this->move_set) as $char){
-			if ($char == 'L'){
-				$this->rotate_left();
-			}
 			if ($char == 'R'){
 				$this->rotate_right();
+			}
+			if ($char == 'L'){
+				$this->rotate_left();
 			}
 			if ($char == 'M'){
 				$this->move_rover();
@@ -115,10 +115,10 @@ class mars_rover{
 
 	private function move_rover(){
 		if ($this->direction[0] == "W" && $this->coordinate[0] < $this->map_size[0]){
-			$this->coordinate[0]++;
+			$this->coordinate[0]--;
 		}
 		else if ($this->direction[0] == "E" && $this->coordinate[0] < $this->map_size[0]){
-			$this->coordinate[0]--;
+			$this->coordinate[0]++;
 		}
 		else if ($this->direction[0] == "N" && $this->coordinate[1] < $this->map_size[1]){
 			$this->coordinate[1]++;
@@ -128,13 +128,13 @@ class mars_rover{
 		}
 	}
 
-   	private function rotate_right() {
+   	private function rotate_left() {
         // Rotate right by shifting the array to the left
         $firstDirection = array_shift($this->direction);
         array_push($this->direction, $firstDirection);
     }
 
-    private function rotate_left() {
+    private function rotate_right() {
         // Rotate left by shifting the array to the right
         $lastDirection = array_pop($this->direction);
         array_unshift($this->direction, $lastDirection);
